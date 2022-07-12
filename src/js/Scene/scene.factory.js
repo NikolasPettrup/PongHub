@@ -16,8 +16,8 @@ let SceneFactory = function(elementId, window) {
 
     let ball = new Ball(scope.context, scope.width, scope.height, 5, 5, 5, 15, "#FFFFFF");
 
-    this.playerOne = new PlayerFactory(scope.context, "user", 0, (scope.height / 2) - 75, 15, 150, "#FFA200");
-    this.playerTwo = new PlayerFactory(scope.context, "com", scope.width - 15, (scope.height / 2) - 75, 15, 150, "#FFA200");
+    this.playerOne = new PlayerFactory(scope.context, "user", 0, (scope.height / 2) - 75, 15, 150, "#FFA200", 1);
+    this.playerTwo = new PlayerFactory(scope.context, "com", scope.width - 15, (scope.height / 2) - 75, 15, 150, "#FFA200", 2);
 
     let score = new Score(0, 0);
     document.getElementById("playerOneScore").innerHTML = score.getScorePlayerOne();
@@ -77,8 +77,8 @@ let SceneFactory = function(elementId, window) {
         ball.setX(scope.width / 2);
         ball.setY(scope.height / 2);
         ball.setSpeed();
-        ball.setVelocityX();
-        ball.setVelocityY();
+        ball.setVelocityX(ball.getVelocityX());
+        ball.setVelocityY(- ball.getVelocityY());
     };
 
     this.getPlayerOne = function () {

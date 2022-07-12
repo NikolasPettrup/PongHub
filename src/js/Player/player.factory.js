@@ -1,6 +1,6 @@
 import {drawRect} from "../mixin.js";
 
-let PlayerFactory = function (context, type, x, y, width, height, color) {
+let PlayerFactory = function (context, type, x, y, width, height, color, id) {
     this.context = context;
     this.type = type;
     this.x = x;
@@ -8,6 +8,7 @@ let PlayerFactory = function (context, type, x, y, width, height, color) {
     this.width = width;
     this.height = height;
     this.color = color;
+    this.id = id;
 
     let scope = this;
 
@@ -39,6 +40,10 @@ let PlayerFactory = function (context, type, x, y, width, height, color) {
         return scope.width;
     };
 
+    this.getId = function () {
+        return scope.id;
+    };
+
     return {
         drawPlayer: this.drawPlayer,
         getType: this.getType,
@@ -46,7 +51,8 @@ let PlayerFactory = function (context, type, x, y, width, height, color) {
         getY: this.getY,
         getHeight: this.getHeight,
         getWidth: this.getWidth,
-        setY: this.setY
+        setY: this.setY,
+        getId: this.getId
     };
 };
 

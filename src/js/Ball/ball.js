@@ -39,10 +39,15 @@ let Ball = function (context, x, y, speed, velocityX, velocityY, r, color) {
 
         let direction = (scope.x < width / 2) ? 1 : -1;
 
-        scope.velocityX = direction * scope.speed * Math.cos(angleRad);
-        scope.velocityY = direction * scope.speed * Math.sin(angleRad);
+        if (player.getId() === 1) {
+            scope.velocityX = direction * scope.speed * Math.cos(angleRad);
+            scope.velocityY = direction * scope.speed * Math.sin(angleRad);
+        } else {
+            scope.velocityX = direction * scope.speed * Math.cos(- angleRad);
+            scope.velocityY = direction * scope.speed * Math.sin(- angleRad);
+        }
 
-        scope.speed += 0.1;
+        scope.speed += 0.5;
     }
 
     this.isColliding = function (player){
