@@ -1,35 +1,28 @@
-export default function SceneFactory (elementId, window, width = 0, height = 0) {
+import {drawNet, drawRect} from "../mixin.js";
 
+let SceneFactory = function(elementId, window) {
     this.element = window.document.getElementById(elementId);
-    this.context = element.getContext("2d")
-    this.width = width;
-    this.height = height;
+    this.context = this.element.getContext("2d")
+    this.width = window.innerWidth;
+    this.height = window.innerHeight;
     this.color = '#000000';
     this.startX = 0;
     this.startY = 0;
-    this.ballFactory = new BallFactory(this.context);
+    let scope = this;
 
-    this.drawRect();
 
     this.draw = function(){
-        this.drawRect();
-        this.drawNet();
+        scope.element.width = scope.width;
+        scope.element.height = scope.height;
+        drawRect(scope.context, scope.startX, scope.startY, scope.width, scope.height, scope.color);
+        drawNet(scope.context, (scope.width / 2) - 1, 0, 2, 10, scope.height, "#FFFFFF");
     };
-
-    this.drawRect = function() {
-        context.fillStyle = this.color;
-        context.fillRect(this.startX, this.startY, this.width, this.height);
-    };
-
-
-    this.drawNet = function(){
-
-    };
-
 
 
     return {
         draw: this.draw
-
     };
 };
+
+
+export default SceneFactory;
