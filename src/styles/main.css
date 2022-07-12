@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'gang_of_three_regular';
+    src: url('../styles/fonts/go3v2-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.scoreboard {
+  position: fixed;
+  top: 0;
+  color: #FFFFFF;
+  font-size: 50px;
+  font-family: "gang_of_three_regular";
+  display: flex;
+}
+
+.score {
+  width: 50vw;
+  text-align: center;
+}

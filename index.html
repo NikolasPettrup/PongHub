@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>PongHub</title>
-    <link href="src/styles/normalize.css" type="text/css" rel="stylesheet">
     <script type="module" src="src/js/main.js"></script>
+    <link href="src/styles/normalize.css" type="text/css" rel="stylesheet">
+    <link href="src/styles/main.css" type="text/css" rel="stylesheet">
 </head>
 <body>
+    <div class="pong-game">
+        <div class="scoreboard">
+            <div class="score" id="playerOne">
+                Player One: <span id="playerOneScore"></span>
+            </div>
+            <div class="score" id="playerTwo">
+                Player Two: <span id="playerTwoScore"></span>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

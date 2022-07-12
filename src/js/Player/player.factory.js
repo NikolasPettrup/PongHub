@@ -19,9 +19,34 @@ let PlayerFactory = function (context, type, x, y, width, height, color) {
         return scope.type;
     };
 
+    this.setY = function (y) {
+        scope.y = y;
+    };
+
+    this.getX = function () {
+        return scope.x;
+    };
+
+    this.getY = function () {
+        return scope.y;
+    };
+
+    this.getHeight = function () {
+        return scope.height;
+    };
+
+    this.getWidth = function () {
+        return scope.width;
+    };
+
     return {
         drawPlayer: this.drawPlayer,
-        getType: this.getType
+        getType: this.getType,
+        getX: this.getX,
+        getY: this.getY,
+        getHeight: this.getHeight,
+        getWidth: this.getWidth,
+        setY: this.setY
     };
 };
 
