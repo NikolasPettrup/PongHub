@@ -1,5 +1,4 @@
-import SceneFactory from "./Scene/scene.factory.js";
-import {paddleDown, paddleUp} from "./paddle/paddleControl.js";
+import Scene from "./Scene/scene.js";
 
 let canvasId = "cvsPong";
 if (!window.document.getElementById(canvasId)) {
@@ -11,29 +10,23 @@ if (!window.document.getElementById(canvasId)) {
     let div = document.getElementsByClassName("pong-game")[0];
     div.appendChild(canvas);
 }
+
 let main = () => {
-    // let scene = new SceneFactory(canvasId, window);
-    // setInterval(scene.game, 1000/120);
+    // let scene = new Scene(canvasId, window);
 };
 
-let scene = new SceneFactory(canvasId, window);
-scene.draw();
-// setInterval(scene.game, 1000/120);
+let scene = {};
 
-window.addEventListener('keydown', function (event) {
-    if (event.code === "KeyW"){
-        paddleUp(scene.getPlayerOne());
-    } else if (event.code === "KeyS"){
-        paddleDown(scene.getPlayerOne(), scene.getHeight());
-    }
-});
-window.addEventListener('keydown', function (event) {
-    if (event.code === "ArrowUp"){
-        paddleUp(scene.getPlayerTwo());
-    } else if (event.code === "ArrowDown"){
-        paddleDown(scene.getPlayerTwo(), scene.getHeight());
-    }
-});
+let start = () => {
+    scene = new Scene(canvasId, window);
+    scene.draw();
+    setInterval(scene.render, 1000/120);
+}
 
 window.addEventListener('load', main);
 window.addEventListener('resize', main);
+window.addEventListener('keydown', function (event) {
+   if (event.code === "Enter" && Object.keys(scene).length === 0) {
+       start();
+   }
+});
