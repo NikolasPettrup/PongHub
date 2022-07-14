@@ -39,6 +39,9 @@ let Scene = function (elementId, window) {
         scope.element.width = scope.width;
         scope.element.height = scope.height;
         drawRect(scope.context, scope.startX, scope.startY, scope.width, scope.height, scope.color);
+        let logo = new Image();
+        logo.src = "../src/assets/img/pong-tri.png";
+        scope.context.drawImage(logo, ((scope.width / 2) - (logo.width / 2)), ((scope.height / 2) - (logo.height / 2)));
         drawNet(scope.context, (scope.width / 2) - 1, 0, 2, 10, scope.height, "#FFA200");
 
         // create ball
