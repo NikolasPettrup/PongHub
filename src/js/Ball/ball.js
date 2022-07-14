@@ -9,6 +9,12 @@ let Ball = function (context, x, y, speed, velocityX, velocityY, r, color) {
     this.velocityY = velocityY;
     this.radius = r;
     this.color = color;
+    let wallCollisionAudio = new Audio("src/assets/audio/wallCollision.mp3");
+    wallCollisionAudio.volume = 0.05;
+    let playerOneCollisionAudio = new Audio("src/assets/audio/playerOneCollision.mp3");
+    playerOneCollisionAudio.volume = 0.02;
+    let playerTwoCollisionAudio = new Audio("src/assets/audio/playerTwoCollision.mp3");
+    playerTwoCollisionAudio.volume = 0.02;
 
     let scope = this;
 
@@ -20,13 +26,16 @@ let Ball = function (context, x, y, speed, velocityX, velocityY, r, color) {
         // detect collision with top or bottom of the field
         if (scope.y + scope.radius > height || scope.y - scope.radius < 0) {
             scope.velocityY = - scope.velocityY;
+            wallCollisionAudio.play();
         }
 
         // detect collision with player
         if (scope.isColliding(playerOne)) {
             scope.collideWithPlayer(playerOne, width);
+            playerOneCollisionAudio.play();
         } else if (scope.isColliding(playerTwo)) {
             scope.collideWithPlayer(playerTwo, width);
+            playerTwoCollisionAudio.play();
         }
 
     };

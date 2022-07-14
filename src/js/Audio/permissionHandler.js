@@ -1,4 +1,4 @@
-const audio = new Audio("src/assets/audio/startmenu.mp3");
+const audio = new Audio("src/assets/audio/ingame.mp3");
 audio.volume = 0.01;
 audio.muted = true;
 

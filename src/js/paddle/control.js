@@ -8,7 +8,6 @@ let Control = function(window) {
     this.eventKeyDown = function (event)
     {
         scope.map[event.key.toLowerCase()] = true;
-        console.log(scope.map);
         event.preventDefault();
     }
 
