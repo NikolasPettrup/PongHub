@@ -19,3 +19,39 @@
   width: 50vw;
   text-align: center;
 }
+
+.starting-screen {
+    background-color: #000000;
+    width: 100vw;
+    height: 100vh;
+    align-content: center;
+    text-align: center;
+}
+
+.main-menu {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.start-message {
+    line-height: 2.5;
+    color: #FFFFFF;
+    font-size: 35px;
+    font-family: "gang_of_three_regular";
+    -webkit-animation: start-message 2s ease-out;
+    -webkit-animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes start-message {
+    0% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.1;
+    }
+}
