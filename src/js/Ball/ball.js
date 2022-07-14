@@ -35,7 +35,7 @@ let Ball = function (context, x, y, speed, velocityX, velocityY, r, color) {
         let collidePoint = (scope.y - (player.getY() + (player.getHeight() / 2)));
         collidePoint = collidePoint / (player.getHeight() / 2);
 
-        let angleRad = collidePoint * (Math.PI / 4);
+        let angleRad = collidePoint * (Math.PI / 3);
 
         let direction = (scope.x < width / 2) ? 1 : -1;
 
@@ -47,7 +47,7 @@ let Ball = function (context, x, y, speed, velocityX, velocityY, r, color) {
             scope.velocityY = direction * scope.speed * Math.sin(- angleRad);
         }
 
-        scope.speed += 0.5;
+        scope.speed += 0.3;
     }
 
     this.isColliding = function (player){

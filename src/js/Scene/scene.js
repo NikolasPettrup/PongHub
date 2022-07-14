@@ -91,7 +91,7 @@ let Scene = function (elementId, window) {
     this.reset = function () {
         ball.setX(scope.width / 2);
         ball.setY(scope.height / 2);
-        ball.setSpeed();
+        ball.setSpeed(5);
         ball.setVelocityX();
         ball.setVelocityY();
     };
