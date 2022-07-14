@@ -56,6 +56,17 @@
     }
 }
 
+.start-message {
+    line-height: 2.5;
+    color: #FFFFFF;
+    font-size: 35px;
+    font-family: "gang_of_three_regular";
+    -webkit-animation: start-message 2s ease-out;
+    -webkit-animation-iteration-count: infinite;
+}
+
+
+
 .alert {
   font: 14px Arial, sans-serif;
   position: fixed;
