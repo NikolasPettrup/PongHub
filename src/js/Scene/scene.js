@@ -4,59 +4,185 @@ import Player from "../Player/player.js";
 import Score from "../Score/score.js";
 import {getControl} from "../paddle/control.js";
 
+
+/**
+ * constructor of Scene
+ *
+ * @param {string} elementId - the id of the canvas
+ * @param {Window} window - the window of the browser
+ * @returns {{
+ *   getHeight: (function(): number),
+ *   update: Scene.update,
+ *   reset: Scene.reset,
+ *   draw: Scene.draw,
+ *   render: Scene.render
+ * }}
+ * @constructor
+ */
 let Scene = function (elementId, window) {
+    /**
+     * canvas element
+     *
+     * @type {HTMLElement}
+     */
     this.element = window.document.getElementById(elementId);
-    this.context = this.element.getContext("2d")
+
+    /**
+     * context from canvas element
+     *
+     * @type {object}
+     */
+    this.context = this.element.getContext("2d");
+
+    /**
+     * width of window
+     *
+     * @type {number}
+     */
     this.width = window.innerWidth;
+
+    /**
+     * height of window
+     *
+     * @type {number}
+     */
     this.height = window.innerHeight;
+
+    /**
+     * color as hex string with default black
+     *
+     * @type {string}
+     */
     this.color = '#000000';
+
+    /**
+     * starting x position with default 0
+     *
+     * @type {number}
+     */
     this.startX = 0;
+
+    /**
+     * starting y position with default 0
+     *
+     * @type {number}
+     */
     this.startY = 0;
 
+
+    /**
+     * scope reference
+     *
+     * @type {Scene}
+     */
     let scope = this;
 
+
+    /**
+     * get instance of control
+     *
+     * @type {Control}
+     */
     let control = getControl();
 
+
+    /**
+     * instantiate a new Ball
+     *
+     * @type {Ball}
+     */
     let ball = new Ball(scope.context, scope.width, scope.height, 5, 5, 5, 15, "#FFFFFF");
 
+
+    /**
+     * instantiate player one and set control keys
+     *
+     * @type {Player}
+     */
     this.playerOne = new Player(scope.context, "user", 0, (scope.height / 2) - 75, 15, 150, "#FFA200", 1);
     this.playerOne.setUpKey("w");
     this.playerOne.setDownKey("s");
     this.playerOne.setSpeedKey("Shift");
 
+
+    /**
+     * instantiate player two and set control keys
+     *
+     * @type {Player}
+     */
     this.playerTwo = new Player(scope.context, "com", scope.width - 15, (scope.height / 2) - 75, 15, 150, "#FFA200", 2);
     this.playerTwo.setUpKey("ArrowUp");
     this.playerTwo.setDownKey("ArrowDown");
     this.playerTwo.setSpeedKey("0");
 
+
+    /**
+     * instantiate the score and set it to 0:0
+     *
+     * @type {Score}
+     */
     let score = new Score(0, 0);
+
+    /**
+     * add player one score to view
+     *
+     * @type {Score.scorePlayerOne|*|number}
+     */
     document.getElementById("playerOneScore").innerHTML = score.getScorePlayerOne();
+
+    /**
+     * add player two score to view
+     *
+     * @type {Score.scorePlayerOne|*|number}
+     */
     document.getElementById("playerTwoScore").innerHTML = score.getScorePlayerTwo();
 
 
+    /**
+     * draw the scene
+     */
     this.draw = function () {
-        // create field with net
-        scope.element.width = scope.width;
-        scope.element.height = scope.height;
+        /**
+         * draw the field background with logo and net
+         */
         drawRect(scope.context, scope.startX, scope.startY, scope.width, scope.height, scope.color);
+
         let logo = new Image();
         logo.src = "../src/assets/img/pong-tri.png";
         scope.context.drawImage(logo, ((scope.width / 2) - (logo.width / 2)), ((scope.height / 2) - (logo.height / 2)));
+
         drawNet(scope.context, (scope.width / 2) - 1, 0, 2, 10, scope.height, "#FFA200");
 
-        // create ball
+
+        /**
+         * draw the ball
+         */
         ball.drawBall();
 
-        // create players
+
+        /**
+         * draw the player paddles
+         */
         scope.playerOne.drawPlayer();
         scope.playerTwo.drawPlayer();
 
     };
 
+
+    /**
+     * update the current scene
+     */
     this.update = function () {
+        /**
+         * move the player paddles if specific keys are pressed
+         */
         scope.playerOne.move(scope.height);
         scope.playerTwo.move(scope.height);
 
+
+        /**
+         * calculate new position of the ball
+         */
         ball.setX(ball.getX() + ball.getVelocityX());
         ball.setY(ball.getY() + ball.getVelocityY());
 
@@ -65,29 +191,46 @@ let Scene = function (elementId, window) {
         // scope.playerOne.setY(scope.playerOne.getY() + ((ball.getY() - (scope.playerOne.getY() + (scope.playerOne.getHeight() / 2)) * computerLevel)));
         // scope.playerTwo.setY(scope.playerTwo.getY() + ((ball.getY() - (scope.playerTwo.getY() + (scope.playerTwo.getHeight() / 2)) * computerLevel)));
 
-        // collision detection
+        /**
+         * detect any form of collisions in the game
+         */
         ball.collisionDetection(scope.width, scope.height, scope.playerOne, scope.playerTwo);
 
-        // check if a player scored a goal
-        if (ball.getX() - ball.getRadius() < 0) {
-            score.setScorePlayerTwo(score.getScorePlayerTwo() + 1);
-            document.getElementById("playerTwoScore").innerHTML = score.getScorePlayerTwo().toString();
-            this.reset();
 
-        } else if (ball.getX() + ball.getRadius() > scope.width) {
+        /**
+         * check if either player one or player two has scored
+         */
+        if (ball.getX() + ball.getRadius() > scope.width) {
+            /**
+             * set player one score + 1 and reset the ball
+             */
             score.setScorePlayerOne(score.getScorePlayerOne() + 1);
             document.getElementById("playerOneScore").innerHTML = score.getScorePlayerOne().toString();
+            this.reset();
+
+        } else if (ball.getX() - ball.getRadius() < 0) {
+            /**
+             * set player two score + 1 and reset the ball
+             */
+            score.setScorePlayerTwo(score.getScorePlayerTwo() + 1);
+            document.getElementById("playerTwoScore").innerHTML = score.getScorePlayerTwo().toString();
             this.reset();
         }
     };
 
 
+    /**
+     * render the game
+     */
     this.render = function () {
         scope.draw();
         scope.update();
     };
 
 
+    /**
+     * reset the ball
+     */
     this.reset = function () {
         ball.setX(scope.width / 2);
         ball.setY(scope.height / 2);
@@ -96,18 +239,40 @@ let Scene = function (elementId, window) {
         ball.setVelocityY();
     };
 
+
+    /**
+     * get instance of player one
+     *
+     * @returns {Player}
+     */
     this.getPlayerOne = function () {
         return scope.playerOne;
     };
 
+
+    /**
+     * get instance of player two
+     *
+     * @returns {Player}
+     */
     this.getPlayerTwo = function () {
         return scope.playerTwo;
     };
 
+
+    /**
+     * get height of the canvas
+     *
+     * @returns {number}
+     */
     this.getHeight = function () {
         return scope.height;
     };
 
+
+    /**
+     * return all functions
+     */
     return {
         draw: this.draw,
         update: this.update,
@@ -120,4 +285,7 @@ let Scene = function (elementId, window) {
 };
 
 
+/**
+ * export Scene to make it importable for other files
+ */
 export default Scene;
