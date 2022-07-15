@@ -117,7 +117,7 @@ let Control = function(window) {
      *
      * @param {array} keyList - the key list for the check
      * @param {function} callback - the function for the callback
-     * @returns {(function(): void)|*}
+     * @returns {(function(): void)}
      */
     this.watchLoop = function (keyList, callback)
     {

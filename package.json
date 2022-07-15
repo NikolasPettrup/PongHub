@@ -1,17 +1,26 @@
 {
   "name": "ponghub",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "jsdoc": "jsdoc -c jsdoc.json",
+    "docs": "gen-docs"
   },
   "keywords": [],
-  "author": "",
+  "author": "NP",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.18.6",
     "@babel/core": "^7.18.6",
     "@babel/preset-env": "^7.18.6"
+  },
+  "autogenerate-readme": {
+    "srcFiles": ["./src/**/*.js"],
+    "use-bitbucket": true
+  },
+  "dependencies": {
+    "autogenerate-readme": "^1.1.0"
   }
 }
