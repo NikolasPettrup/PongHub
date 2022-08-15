@@ -123,12 +123,14 @@ let Scene = function (elementId, window) {
      */
     let score = new Score(0, 0);
 
+
     /**
      * add player one score to view
      *
      * @type {Score.scorePlayerOne|*|number}
      */
     document.getElementById("playerOneScore").innerHTML = score.getScorePlayerOne();
+
 
     /**
      * add player two score to view

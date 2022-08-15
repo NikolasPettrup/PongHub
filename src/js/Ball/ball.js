@@ -87,32 +87,6 @@ let Ball = function (context, x, y, speed, velocityX, velocityY, r, color) {
      */
     this.color = color;
 
-
-    // /**
-    //  * add audio for wall collision
-    //  *
-    //  * @type {HTMLAudioElement}
-    //  */
-    // let wallCollisionAudio = new Audio("src/assets/audio/wallCollision.mp3");
-    // wallCollisionAudio.volume = 0.05;
-
-    // /**
-    //  * add audio for player one collision
-    //  *
-    //  * @type {HTMLAudioElement}
-    //  */
-    // let playerOneCollisionAudio = new Audio("src/assets/audio/playerOneCollision.mp3");
-    // playerOneCollisionAudio.volume = 0.02;
-
-    // /**
-    //  * add audio for player two collision
-    //  *
-    //  * @type {HTMLAudioElement}
-    //  */
-    // let playerTwoCollisionAudio = new Audio("src/assets/audio/playerTwoCollision.mp3");
-    // playerTwoCollisionAudio.volume = 0.02;
-
-
     /**
      * create a scope reference
      *
@@ -143,7 +117,6 @@ let Ball = function (context, x, y, speed, velocityX, velocityY, r, color) {
          */
         if (scope.y + scope.radius > height || scope.y - scope.radius < 0) {
             scope.velocityY = - scope.velocityY;
-            // wallCollisionAudio.play();
         }
 
 
@@ -152,11 +125,9 @@ let Ball = function (context, x, y, speed, velocityX, velocityY, r, color) {
          */
         if (scope.isColliding(playerOne)) {
             scope.collideWithPlayer(playerOne, width);
-            // playerOneCollisionAudio.play();
 
         } else if (scope.isColliding(playerTwo)) {
             scope.collideWithPlayer(playerTwo, width);
-            // playerTwoCollisionAudio.play();
         }
 
     };
