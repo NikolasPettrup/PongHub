@@ -148,11 +148,10 @@ let Scene = function (elementId, window) {
         drawRect(scope.context, scope.startX, scope.startY, scope.width, scope.height, scope.color);
 
         let logo = new Image();
-        logo.src = "../src/assets/img/pong-tri.png";
-        scope.context.globalAlpha = 0.5;
+        logo.src = "../src/assets/img/pong-tri-50op.png";
         scope.context.drawImage(logo, ((scope.width / 2) - (logo.width / 2)), ((scope.height / 2) - (logo.height / 2)));
 
-        scope.context.globalAlpha = 1;
+
 
         drawNet(scope.context, (scope.width / 2) - 1, 0, 2, 10, scope.height, "#FFA200");
 
@@ -261,7 +260,7 @@ let Scene = function (elementId, window) {
                         countdown(remaining - 1);
                     }, 1000);
                 }
-            })(10);
+            })(5);
         }
     };
 
