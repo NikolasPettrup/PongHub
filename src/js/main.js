@@ -45,6 +45,7 @@ let start = () => {
      */
     let canvasId = "cvsPong";
 
+
     /**
      * check if canvas already exists
      */
@@ -106,7 +107,7 @@ let start = () => {
      * @param {function} func - the function which will be executed in the set interval
      * @param {number} timeout - the timeout (frames per second)
      */
-    setInterval(scene.render, 1000/120);
+    window.myTimer = setInterval(scene.render, 1000/120);
 }
 
 

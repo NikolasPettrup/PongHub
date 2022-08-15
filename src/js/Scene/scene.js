@@ -216,6 +216,50 @@ let Scene = function (elementId, window) {
             document.getElementById("playerTwoScore").innerHTML = score.getScorePlayerTwo().toString();
             this.reset();
         }
+
+
+        /**
+         * check if either player one or player two has won
+         */
+        if (score.getScorePlayerOne() === score.getPointsToWin() || score.getScorePlayerTwo() === score.getPointsToWin())
+        {
+            /**
+             * remove game canvas
+             */
+            document.getElementById("cvsPong").remove();
+            clearInterval(window.myTimer);
+
+
+            /**
+             * set display of ending-screen to block
+             */
+            document.getElementById("ending-screen").style.display = "block";
+
+
+            /**
+             * show winner message
+             */
+            if (score.getScorePlayerOne() === score.getPointsToWin()) {
+                document.getElementById("winner-message").innerHTML = "Player One wins!";
+            } else {
+                document.getElementById("winner-message").innerHTML = "Player Two wins!";
+            }
+
+            /**
+             * show countdown before reloading game
+             */
+            (function countdown(remaining) {
+                if (remaining <= 0)
+                {
+                    window.location.reload();
+                } else {
+                    document.getElementById("time").innerHTML = remaining + " ";
+                    setTimeout(function () {
+                        countdown(remaining - 1);
+                    }, 1000);
+                }
+            })(10);
+        }
     };
 
 

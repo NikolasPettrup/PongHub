@@ -26,6 +26,14 @@ let Score = function (scorePlayerOne, scorePlayerTwo) {
      */
     this.scorePlayerTwo = scorePlayerTwo;
 
+
+    /**
+     * set points to be reached to win the game
+     *
+     * @type {number}
+     */
+    this.pointsToWin = 5;
+
     /**
      * set a scope reference
      *
@@ -54,6 +62,11 @@ let Score = function (scorePlayerOne, scorePlayerTwo) {
     };
 
 
+    this.getPointsToWin = function () {
+        return scope.pointsToWin;
+    }
+
+
     /**
      * set the score of player one
      *
@@ -80,6 +93,7 @@ let Score = function (scorePlayerOne, scorePlayerTwo) {
     return {
         getScorePlayerOne: this.getScorePlayerOne,
         getScorePlayerTwo: this.getScorePlayerTwo,
+        getPointsToWin: this.getPointsToWin,
         setScorePlayerOne: this.setScorePlayerOne,
         setScorePlayerTwo: this.setScorePlayerTwo
     };
