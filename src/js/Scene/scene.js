@@ -149,7 +149,10 @@ let Scene = function (elementId, window) {
 
         let logo = new Image();
         logo.src = "../src/assets/img/pong-tri.png";
+        scope.context.globalAlpha = 0.5;
         scope.context.drawImage(logo, ((scope.width / 2) - (logo.width / 2)), ((scope.height / 2) - (logo.height / 2)));
+
+        scope.context.globalAlpha = 1;
 
         drawNet(scope.context, (scope.width / 2) - 1, 0, 2, 10, scope.height, "#FFA200");
 
