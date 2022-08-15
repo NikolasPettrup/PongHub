@@ -14,10 +14,13 @@
   "devDependencies": {
     "@babel/cli": "^7.18.6",
     "@babel/core": "^7.18.6",
-    "@babel/preset-env": "^7.18.6"
+    "@babel/preset-env": "^7.18.6",
+    "jsdoc-to-markdown": "^7.1.1"
   },
   "autogenerate-readme": {
-    "srcFiles": ["./src/**/*.js"],
+    "srcFiles": [
+      "./src/**/*.js"
+    ],
     "use-bitbucket": true
   },
   "dependencies": {
